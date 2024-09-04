@@ -27,7 +27,7 @@ function Open() {
                 <h1>WHOSAdmin</h1>
                 <input type="text" id="selectedID" placeholder="PlayerID" value="${plrid}">
                 <button onclick="buttonAction1()">Change Job</button>
-                <button onclick="Open()">Reload (Currently Not Working)</button>
+                <button onclick="buttonAction2()">Reload</button>
             </div>
             <div id="playerIds">
                 ${playersHtml}
@@ -69,7 +69,12 @@ function jobChange() {
 }
 
 function buttonAction2() {
-    alert('Button 2 clicked');
+    fetch(`https://${GetParentResourceName()}/nupd`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+    });
 }
 
 function buttonAction3() {
