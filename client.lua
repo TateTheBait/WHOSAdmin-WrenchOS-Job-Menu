@@ -44,8 +44,22 @@ RegisterNUICallback("updateplrs", function (data, cb)
         for _, player in pairs(players) do
             plrlist[#plrlist+1] = {plrid=player.plrid, plrname=player.firstname, job=player.job}
         end
-
+        
     cb(json.encode(plrlist))
+end)
+
+RegisterNUICallback('nupd', function (data, cb)
+    local plrlist = {}
+        local players = exports.WrenchOS:getPlayers()
+        for _, player in pairs(players) do
+            plrlist[#plrlist+1] = {plrid=player.plrid, plrname=player.firstname, job=player.job}
+        end
+        
+    SendNUIMessage({
+        type = "open",
+        plrs = json.encode(plrlist)
+    })
+    cb("SA")
 end)
 
 RegisterNUICallback('changeJob', function(data, cb)
