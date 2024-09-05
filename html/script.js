@@ -55,7 +55,6 @@ function buttonAction1() {
 function jobChange() {
     var jobName = document.getElementById('jobNameInput').value;
     plrid = document.getElementById('selectedID').value;
-    console.log(jobName);
     fetch(`https://${GetParentResourceName()}/changeJob`, {
         method: 'POST',
         headers: {
