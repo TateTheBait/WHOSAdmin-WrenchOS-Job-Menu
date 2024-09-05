@@ -1,9 +1,3 @@
-local file = ('imports/%s.lua'):format(IsDuplicityVersion() and 'server' or 'client')
-local import = LoadResourceFile('ox_core', file)
-local chunk = assert(load(import, ('@@ox_core/%s'):format(file)))
-chunk()
-
-
 local function plrcheck(job)
     local allowed=false
     for _, sjob in pairs(Config.AllowedJobs) do
