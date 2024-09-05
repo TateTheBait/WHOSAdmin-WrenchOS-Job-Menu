@@ -64,6 +64,5 @@ end)
 
 RegisterNUICallback('changeJob', function(data, cb)
     exports.WrenchOS:changeJob(tonumber(data.playerid), data.job)
-    print("TEST")
     cb("asdf")
 end)
