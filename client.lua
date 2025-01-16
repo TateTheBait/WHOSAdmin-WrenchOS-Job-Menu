@@ -1,7 +1,7 @@
-local function plrcheck(job)
+local function plrcheck(job, rank)
     local allowed=false
     for _, sjob in pairs(Config.AllowedJobs) do
-        if job == sjob then
+        if job == sjob.j and rank == sjob.r then
             allowed=true
         end
     end
@@ -10,7 +10,7 @@ end
 
 
 RegisterCommand("whos", function ()
-    if plrcheck(exports.WrenchOS:getPlayer(PlayerId()).job) then
+    if plrcheck(exports.WrenchOS:getPlayer(PlayerId()).job, exports.WrenchOS:getPlayer(PlayerId()).rank) then
         local plrlist = {}
         local players = exports.WrenchOS:getPlayers()
         for _, player in pairs(players) do
@@ -58,5 +58,13 @@ end)
 
 RegisterNUICallback('changeJob', function(data, cb)
     exports.WrenchOS:changeJob(tonumber(data.playerid), data.job)
+    print("TEST")
+    cb("asdf")
+end)
+
+
+RegisterNUICallback('changeRank', function(data, cb)
+    exports.WrenchOS:changeRank(tonumber(data.playerid), data.job)
+    print("TEST")
     cb("asdf")
 end)

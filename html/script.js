@@ -4,6 +4,17 @@ plrid = "";
 
 document.getElementById("menu").style.display = "none";
 
+
+function reload() {
+    fetch(`https://${GetParentResourceName()}/updateplrs`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+    });
+}
+
+
 function Open() {
     fetch(`https://${GetParentResourceName()}/updateplrs`, {
         method: 'POST',
@@ -27,7 +38,8 @@ function Open() {
                 <h1>WHOSAdmin</h1>
                 <input type="text" id="selectedID" placeholder="PlayerID" value="${plrid}">
                 <button onclick="buttonAction1()">Change Job</button>
-                <button onclick="buttonAction2()">Reload</button>
+                <button onclick="buttonAction2()">Change Rank</button>
+                <button onclick="reload()">Reload</button>
             </div>
             <div id="playerIds">
                 ${playersHtml}
@@ -52,10 +64,26 @@ function buttonAction1() {
     `;
 }
 
-function jobChange() {
+function buttonAction2() {
+    plrid = document.getElementById('selectedID').value;
+    document.getElementById('menu').innerHTML = `
+        <div id="secondMenuContainer">
+            <div id="secondMenu">
+                <h1>Change Rank</h1>
+                <input id="selectedID" type="text" value="${plrid}" placeholder="PlayerID">
+                <input type="text" id="jobNameInput" placeholder="RankName">
+                <button onclick="rankChange()">Change Rank</button>
+                <button onclick="Open()">Back</button 
+            </div>
+        </div>
+    `;
+}
+
+function rankChange() {
     var jobName = document.getElementById('jobNameInput').value;
     plrid = document.getElementById('selectedID').value;
-    fetch(`https://${GetParentResourceName()}/changeJob`, {
+    console.log(jobName);
+    fetch(`https://${GetParentResourceName()}/changeRank`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -67,17 +95,21 @@ function jobChange() {
     });
 }
 
-function buttonAction2() {
-    fetch(`https://${GetParentResourceName()}/nupd`, {
+
+function jobChange() {
+    var jobName = document.getElementById('jobNameInput').value;
+    plrid = document.getElementById('selectedID').value;
+    console.log(jobName);
+    fetch(`https://${GetParentResourceName()}/changeJob`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
         },
+        body: JSON.stringify({
+            playerid: plrid,
+            job: jobName
+        })
     });
-}
-
-function buttonAction3() {
-    alert('Button 3 clicked');
 }
 
 window.addEventListener('message', (event) => {

@@ -1,3 +1,3 @@
 Config = {}
 
-Config.AllowedJobs = {"OWNER", "HIGHSTAFF"}
+Config.AllowedJobs = {{j = "HIGHSTAFF", r = "FFA"}, {j = "LEO", r = "CHIEF"}}
